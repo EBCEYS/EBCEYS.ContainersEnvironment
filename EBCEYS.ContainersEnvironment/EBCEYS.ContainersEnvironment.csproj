@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>EBCEYS.ContainersEnvironment</Title>
+    <Version>0.0.1</Version>
+    <Authors>EBCEYS</Authors>
+    <Description>Библиотека для работы с окружением контейнера.</Description>
+    <PackageTags>docker;containers;docker-compose;docker-containers;dotnet;dotnet8;csharp</PackageTags>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+</Project>
