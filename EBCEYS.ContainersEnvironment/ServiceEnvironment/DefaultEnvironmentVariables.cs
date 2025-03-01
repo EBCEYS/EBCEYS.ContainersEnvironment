@@ -11,5 +11,13 @@
         /// Returns the container name if exists; otherwise <see cref="Environment.MachineName"/>.
         /// </summary>
         public static ServiceEnvironmentVariable<string> ContainerName { get; } = new(containerNameKey, Environment.MachineName, containerNameDesc);
+        /// <summary>
+        /// Gets the default environment variables info collection.
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<ServiceEnvironmentInfo> GetVariablesInfo()
+        {
+            return [ContainerName.GetInfo()];
+        }
     }
 }
