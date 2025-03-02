@@ -1,19 +1,24 @@
 # EBCEYS.ContainersEnvironment
 
-## Описание
+[![.NET](https://github.com/EBCEYS/EBCEYS.ContainersEnvironment/actions/workflows/dotnet.yml/badge.svg)](https://github.com/EBCEYS/EBCEYS.ContainersEnvironment/actions/workflows/dotnet.yml)
 
-Библиотека для удобной работы сервисов внутри docker контейнера.
+## РћРїРёСЃР°РЅРёРµ
 
-## Переменные окружения
+Р‘РёР±Р»РёРѕС‚РµРєР° РґР»СЏ СѓРґРѕР±РЅРѕР№ СЂР°Р±РѕС‚С‹ СЃРµСЂРІРёСЃРѕРІ РІРЅСѓС‚СЂРё docker РєРѕРЅС‚РµР№РЅРµСЂР°.
 
-`public class ServiceEnvironmentVariable<T>` используется для доступа к переменным окружения.
+## РџРµСЂРµРјРµРЅРЅС‹Рµ РѕРєСЂСѓР¶РµРЅРёСЏ
 
-`public static class DefaultEnvironmentVariables` содержит внутри себя инстансы переменных окружения общих для контейнеров.
+`public class ServiceEnvironmentVariable<T>` РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РґРѕСЃС‚СѓРїР° Рє РїРµСЂРµРјРµРЅРЅС‹Рј РѕРєСЂСѓР¶РµРЅРёСЏ.
 
-`public interface IEnvironmentConverter` интерфейс описывающий методы для конвертации переменной окружения в нужный тип.
+`public static class DefaultEnvironmentVariables` СЃРѕРґРµСЂР¶РёС‚ РІРЅСѓС‚СЂРё СЃРµР±СЏ РёРЅСЃС‚Р°РЅСЃС‹ РїРµСЂРµРјРµРЅРЅС‹С… РѕРєСЂСѓР¶РµРЅРёСЏ РѕР±С‰РёС… РґР»СЏ РєРѕРЅС‚РµР№РЅРµСЂРѕРІ.
 
-## Изменения
+`public interface IEnvironmentConverter` РёРЅС‚РµСЂС„РµР№СЃ РѕРїРёСЃС‹РІР°СЋС‰РёР№ РјРµС‚РѕРґС‹ РґР»СЏ РєРѕРЅРІРµСЂС‚Р°С†РёРё РїРµСЂРµРјРµРЅРЅРѕР№ РѕРєСЂСѓР¶РµРЅРёСЏ РІ РЅСѓР¶РЅС‹Р№ С‚РёРї.
 
+## РР·РјРµРЅРµРЅРёСЏ
+### v0.0.2:
+1. РСЃРїСЂР°РІРёР» ReadMe РІ РїР°РєРµС‚Рµ.
+1. Р”РѕР±Р°РІР»РµРЅР° СЃСѓС‰РЅРѕСЃС‚СЊ `public class ContainerLabelInfo<T>` РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ *labels* РєРѕРЅС‚РµР№РЅРµСЂР°.
+1. Р”РѕР±Р°РІР»РµРЅ СЌРєСЃС‚РµРЅС€РЅ РјРµС‚РѕРґ `public static ContainerLabelInfo<T>? GetLabel<T>(this IDictionary<string, string> labels, string key, IEnvironmentConverter? converter = null)` СЃРѕР·РґР°СЋС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ `public class ContainerLabelInfo<T>`.
 ### v0.0.1:
 
-1. Работа с переменныим окружения.
+1. Р Р°Р±РѕС‚Р° СЃ РїРµСЂРµРјРµРЅРЅС‹РјРё РѕРєСЂСѓР¶РµРЅРёСЏ.
