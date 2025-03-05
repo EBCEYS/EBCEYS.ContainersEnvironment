@@ -15,6 +15,9 @@
 `public interface IEnvironmentConverter` интерфейс описывающий методы для конвертации переменной окружения в нужный тип.
 
 ## Изменения
+### v0.0.3:
+1. Добавлены переменные окружения для конфигурации.
+1. Добавлен класс `public class ConfigurationFileInfo(string serverFileFullPath, DateTimeOffset lastWriteUTC, string containerTypeName, string fileSaveFullPath)`, служащий для передачи информации о файле конфигурации от сервера.
 ### v0.0.2:
 1. Исправил ReadMe в пакете.
 1. Добавлена сущность `public class ContainerLabelInfo<T>` для работы с *labels* контейнера.
