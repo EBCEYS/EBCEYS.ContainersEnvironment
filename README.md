@@ -14,7 +14,40 @@
 
 `public interface IEnvironmentConverter` интерфейс описывающий методы для конвертации переменной окружения в нужный тип.
 
+## Конфигурация сервисов
+
+Создано для работы с [сервисом конфигурации](https://github.com/EBCEYS/EBCEYS.Server-Configuration).
+
+`public class ConfigurationFileInfo` - объект, возвращаемым сервисом, содержащий информацию о конфигурации контейнера.
+`public static class ConfigurationEnvironment` - статический класс, содержащий переменные окружения для конфигурации.
+
+## *HealthChecks*
+
+Для добавления *HealthCheck*-ов в сервис используются экстеншон методы:
+* `public static IServiceCollection ConfigureHealthChecks(this IServiceCollection sc)` - добавляет *HealthCheck* в сервис и `PingServiceHealthStatusInfo` как *singleton*, чтобы его можно было использовать далее в сервисах.
+* `public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app, int port)` на `IApplicationBuilder`.
+
+Добавляет поддержку переменной окружения *HEALTHCHECKS_STARTING_PORT=int*, в которой указывается порт запуска *HealthCheck*-ов.
+
+*Routes*:
+```cs
+/// <summary>
+/// The ping route.
+/// </summary>
+public const string PingRoute = "/ping";
+/// <summary>
+/// The healthz route.
+/// </summary>
+public const string HealthzRoute = "/healthz";
+/// <summary>
+/// The healthz status route.
+/// </summary>
+public const string HealthzStatusRoute = "/healthz/status";
+```
+
 ## Изменения
+### v0.0.4:
+1. Добавлены *HealthChecks*.
 ### v0.0.3:
 1. Добавлены переменные окружения для конфигурации.
 1. Добавлен класс `public class ConfigurationFileInfo(string serverFileFullPath, DateTimeOffset lastWriteUTC, string containerTypeName, string fileSaveFullPath)`, служащий для передачи информации о файле конфигурации от сервера.

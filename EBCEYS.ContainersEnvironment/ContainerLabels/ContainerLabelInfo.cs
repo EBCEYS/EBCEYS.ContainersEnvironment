@@ -4,25 +4,20 @@
     /// A <see cref="ContainerLabelInfo{T}"/> class.
     /// </summary>
     /// <typeparam name="T">The <see cref="Value"/> type.</typeparam>
-    public class ContainerLabelInfo<T>
+    /// <remarks>
+    /// Initiates a new instance of <see cref="ContainerLabelInfo{T}"/>.
+    /// </remarks>
+    /// <param name="key">The key.</param>
+    /// <param name="value">The value.</param>
+    public class ContainerLabelInfo<T>(string key, T? value)
     {
         /// <summary>
         /// The key.
         /// </summary>
-        public string Key { get; }
+        public string Key { get; } = key;
         /// <summary>
         /// The value.
         /// </summary>
-        public T? Value { get; }
-        /// <summary>
-        /// Initiates a new instance of <see cref="ContainerLabelInfo{T}"/>.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="value">The value.</param>
-        public ContainerLabelInfo(string key, T? value)
-        {
-            Key = key;
-            Value = value;
-        }
+        public T? Value { get; } = value;
     }
 }
