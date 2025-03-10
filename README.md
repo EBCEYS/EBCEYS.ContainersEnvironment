@@ -27,7 +27,8 @@
 * `public static IServiceCollection ConfigureHealthChecks(this IServiceCollection sc)` - добавляет *HealthCheck* в сервис и `PingServiceHealthStatusInfo` как *singleton*, чтобы его можно было использовать далее в сервисах.
 * `public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app, int port)` на `IApplicationBuilder`.
 
-Добавляет поддержку переменной окружения *HEALTHCHECKS_STARTING_PORT=int*, в которой указывается порт запуска *HealthCheck*-ов.
+Добавляет поддержку переменной окружения *HEALTHCHECKS_ENABLE=bool*, которая включает и выключает *HealthChecks*. По умолчанию *true*.
+Добавляет поддержку переменной окружения *HEALTHCHECKS_STARTING_PORT=int*, в которой указывается порт запуска *HealthCheck*-ов. По умолчанию *8080*.
 
 *Routes*:
 ```cs
@@ -46,6 +47,8 @@ public const string HealthzStatusRoute = "/healthz/status";
 ```
 
 ## Изменения
+### v0.0.5:
+1. Добавлена переменная окружения *HEALTHCHECKS_ENABLE=true*, которая включает и выключает *HealthChecks*.
 ### v0.0.4:
 1. Добавлены *HealthChecks*.
 ### v0.0.3:

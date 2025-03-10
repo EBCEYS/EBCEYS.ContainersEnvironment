@@ -15,14 +15,19 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Extensions
         /// <summary>
         /// Configures the service healthchecks api with <paramref name="port"/>.<br/>
         /// <see cref="IApplicationBuilder.ApplicationServices"/> should contain <see cref="PingServiceHealthStatusInfo"/> as <c>singleton</c>.<br/>
-        /// Use <see cref="ConfigureHealthChecks(IServiceCollection)"/> before.
+        /// Use <see cref="ConfigureHealthChecks(IServiceCollection)"/> before.<br/>
+        /// Healthchecks will not be configured if <see cref="HealthChecksEnvironmentVariables.HealthChecksEnabled"/> is <c>false</c>.
         /// </summary>
         /// <param name="app">The application builder.</param>
         /// <param name="port">The healthcheck server port.</param>
         /// <returns>The instance of <paramref name="app"/>.</returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app, int port = HealthChecksEnvironmentVariables.StartingPort)
+        public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app, int port)
         {
+            if (!HealthChecksEnvironmentVariables.HealthChecksEnabled.Value!.Value)
+            {
+                return app;
+            }
             if (app.ApplicationServices.GetService<PingServiceHealthStatusInfo>() == null)
             {
                 throw new InvalidOperationException($"{typeof(PingServiceHealthStatusInfo).Name} is not configured in service collection!");
@@ -72,12 +77,15 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Extensions
         /// Adds <see cref="PingHealthCheck"/> as <see cref="IHealthCheck"/>.
         /// </summary>
         /// <param name="sc">The service collection.</param>
-        /// <returns>The instance of <paramref name="sc"/>.</returns>
-        public static IServiceCollection ConfigureHealthChecks(this IServiceCollection sc)
+        /// <returns>The instance of <see cref="IHealthChecksBuilder"/> or <c>null</c> if <see cref="HealthChecksEnvironmentVariables.HealthChecksEnabled"/> is <c>false</c>.</returns>
+        public static IHealthChecksBuilder? ConfigureHealthChecks(this IServiceCollection sc)
         {
             sc.AddSingleton<PingServiceHealthStatusInfo>();
-            sc.AddHealthChecks().AddCheck<PingHealthCheck>(PingServiceHealthStatusInfo.HealthCheckName, HealthStatus.Unhealthy, [ServiceEnvironment.DefaultEnvironmentVariables.ContainerName.Value ?? string.Empty]);
-            return sc;
+            if (!HealthChecksEnvironmentVariables.HealthChecksEnabled.Value!.Value)
+            {
+                return null;
+            }
+            return sc.AddHealthChecks().AddCheck<PingHealthCheck>(PingServiceHealthStatusInfo.HealthCheckName, HealthStatus.Unhealthy, [ServiceEnvironment.DefaultEnvironmentVariables.ContainerName.Value ?? string.Empty]);
         }
     }
 }

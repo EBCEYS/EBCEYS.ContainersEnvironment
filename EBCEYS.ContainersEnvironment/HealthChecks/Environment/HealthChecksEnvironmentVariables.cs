@@ -8,11 +8,15 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Environment
     public static class HealthChecksEnvironmentVariables
     {
         private const string healthChecksPort = "HEALTHCHECKS_STARTING_PORT";
-        internal const int StartingPort = 8080;
+        private const string enableHealthChecks = "HEALTHCHECKS_ENABLE";
         /// <summary>
-        /// The healthchecks starting port.
+        /// The healthchecks starting port. Default is <c>8080</c>.
         /// </summary>
-        public static ServiceEnvironmentVariable<int> HealthChecksPort { get; } = new(healthChecksPort, StartingPort);
+        public static ServiceEnvironmentVariable<int> HealthChecksPort { get; } = new(healthChecksPort, 8080);
+        /// <summary>
+        /// The healthchecks are enabled. Default is <c>true</c>.
+        /// </summary>
+        public static ServiceEnvironmentVariable<bool?> HealthChecksEnabled { get; } = new(enableHealthChecks, true);
         /// <summary>
         /// Gets the info of all <see cref="ServiceEnvironmentVariable{T}"/> in <see cref="HealthChecksEnvironmentVariables"/>.
         /// </summary>
