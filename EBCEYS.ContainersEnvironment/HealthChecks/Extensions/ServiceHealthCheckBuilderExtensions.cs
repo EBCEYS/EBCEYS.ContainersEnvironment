@@ -68,7 +68,7 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Extensions
         /// <exception cref="InvalidOperationException"></exception>
         public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app)
         {
-            int port = HealthChecksEnvironmentVariables.HealthChecksPort.Value;
+            int port = HealthChecksEnvironmentVariables.HealthChecksPort.Value!.Value;
             return app.ConfigureHealthChecks(port);
         }
         /// <summary>

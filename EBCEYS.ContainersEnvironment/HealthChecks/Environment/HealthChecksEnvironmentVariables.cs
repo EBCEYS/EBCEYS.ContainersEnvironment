@@ -12,7 +12,7 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Environment
         /// <summary>
         /// The healthchecks starting port. Default is <c>8080</c>.
         /// </summary>
-        public static ServiceEnvironmentVariable<int> HealthChecksPort { get; } = new(healthChecksPort, 8080);
+        public static ServiceEnvironmentVariable<int?> HealthChecksPort { get; } = new(healthChecksPort, 8080);
         /// <summary>
         /// The healthchecks are enabled. Default is <c>true</c>.
         /// </summary>

@@ -1,4 +1,6 @@
-﻿namespace EBCEYS.ContainersEnvironment.Configuration.Models
+﻿using System.Text.Json.Serialization;
+
+namespace EBCEYS.ContainersEnvironment.Configuration.Models
 {
     /// <summary>
     /// A <see cref="ConfigurationFileInfo"/> class.
@@ -10,6 +12,7 @@
     /// <param name="lastWriteUTC">The last write UTC.</param>
     /// <param name="containerTypeName">The container type name.</param>
     /// <param name="fileSaveFullPath">The file save full path.</param>
+    [JsonDerivedType(typeof(ConfigurationFileInfo))]
     public class ConfigurationFileInfo(string serverFileFullPath, DateTimeOffset lastWriteUTC, string containerTypeName, string fileSaveFullPath)
     {
         /// <summary>

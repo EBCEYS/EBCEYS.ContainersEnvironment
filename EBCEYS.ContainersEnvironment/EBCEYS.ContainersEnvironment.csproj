@@ -7,7 +7,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>EBCEYS.ContainersEnvironment</Title>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <Authors>EBCEYS</Authors>
     <Description>Библиотека для работы с окружением контейнера.</Description>
     <PackageTags>docker;containers;docker-compose;docker-containers;dotnet;dotnet8;csharp</PackageTags>
@@ -16,6 +16,16 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <RepositoryUrl>https://github.com/EBCEYS/EBCEYS.ContainersEnvironment</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible>True</IsAotCompatible>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible>True</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>
