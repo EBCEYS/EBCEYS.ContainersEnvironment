@@ -1,5 +1,5 @@
 ﻿using EBCEYS.ContainersEnvironment.HealthChecks.Environment;
-using HealthChecks.UI.Client;
+using EBCEYS.ContainersEnvironment.HealthChecks.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,7 +53,7 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Extensions
             .UseHealthChecks(ServiceHealthChecksRoutes.HealthzStatusRoute, port, new()
             {
                 Predicate = _ => { return true; },
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                ResponseWriter = TimmedHealthReportWriter.WriteHealthCheckUIResponse
             }
             );
         }

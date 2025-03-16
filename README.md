@@ -48,6 +48,8 @@ public const string HealthzStatusRoute = "/healthz/status";
 ```
 
 ## Изменения
+### v0.0.7:
+1. Попытка сделать сериализацию *HealthReports* под *trimmed* публикацию.
 ### v0.0.6:
 1. Сборка под AOT.
 1. *HEALTHCHECKS_STARTING_PORT* - сделан опциональным. По умолчанию *8080*.
