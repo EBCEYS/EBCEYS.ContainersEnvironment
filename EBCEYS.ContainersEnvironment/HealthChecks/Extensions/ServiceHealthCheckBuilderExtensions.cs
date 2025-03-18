@@ -1,5 +1,6 @@
 ﻿using EBCEYS.ContainersEnvironment.HealthChecks.Environment;
 using EBCEYS.ContainersEnvironment.HealthChecks.Models;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,9 +21,10 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Extensions
         /// </summary>
         /// <param name="app">The application builder.</param>
         /// <param name="port">The healthcheck server port.</param>
+        /// <param name="useSourceGen">Use source generator to write healthcheck result.</param>
         /// <returns>The instance of <paramref name="app"/>.</returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app, int port)
+        public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app, int port, bool useSourceGen = false)
         {
             if (!HealthChecksEnvironmentVariables.HealthChecksEnabled.Value!.Value)
             {
@@ -53,7 +55,14 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Extensions
             .UseHealthChecks(ServiceHealthChecksRoutes.HealthzStatusRoute, port, new()
             {
                 Predicate = _ => { return true; },
-                ResponseWriter = TimmedHealthReportWriter.WriteHealthCheckUIResponse
+                ResponseWriter = (HttpContext ctx, HealthReport rep) => 
+                {
+                    if (useSourceGen)
+                    {
+                        return TimmedHealthReportWriter.WriteHealthCheckUIResponse(ctx, rep);
+                    }
+                    return UIResponseWriter.WriteHealthCheckUIResponse(ctx, rep);
+                }
             }
             );
         }
@@ -64,12 +73,13 @@ namespace EBCEYS.ContainersEnvironment.HealthChecks.Extensions
         /// Gets starting port from <see cref="HealthChecksEnvironmentVariables.HealthChecksPort"/>.
         /// </summary>
         /// <param name="app">The application builder.</param>
+        /// <param name="useSourceGen">Use source generator to write healthcheck result.</param>
         /// <returns>The instance of <paramref name="app"/>.</returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app)
+        public static IApplicationBuilder ConfigureHealthChecks(this IApplicationBuilder app, bool useSourceGen = false)
         {
             int port = HealthChecksEnvironmentVariables.HealthChecksPort.Value!.Value;
-            return app.ConfigureHealthChecks(port);
+            return app.ConfigureHealthChecks(port, useSourceGen);
         }
         /// <summary>
         /// Configures the healthcheck services.<br/>
